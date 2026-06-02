@@ -1,9 +1,19 @@
 import { ArrowRight, BadgeCheck, Film, Mic, ShieldCheck, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import EditorCard from "../components/EditorCard";
+import api from "../lib/api";
 import { categories, featuredEditors } from "../data/mock";
 
 export default function LandingPage() {
+  const [prompts, setPrompts] = useState([]);
+
+  useEffect(() => {
+    api.get("/prompts")
+      .then(({ data }) => setPrompts(data.prompts?.slice(0, 3) || []))
+      .catch(() => setPrompts([]));
+  }, []);
+
   return (
     <main>
       <section className="animated-gradient relative overflow-hidden">
@@ -45,6 +55,29 @@ export default function LandingPage() {
               <strong className="text-white">{category}</strong>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[.22em] text-cyan-200">Prompt bank</p>
+            <h2 className="mt-2 text-3xl font-black text-white">Public prompts shared by the community</h2>
+          </div>
+          <Link to="/prompts" className="btn btn-soft">See all prompts</Link>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {prompts.length ? prompts.map((prompt) => (
+            <div key={prompt._id} className="glass rounded-lg p-6">
+              <h3 className="text-xl font-bold text-white">{prompt.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-300 line-clamp-3">{prompt.text}</p>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs uppercase tracking-[.18em] text-cyan-200">
+                {prompt.tags?.map((tag) => <span key={tag} className="chip">{tag}</span>)}
+              </div>
+            </div>
+          )) : (
+            <div className="glass rounded-lg p-6 text-slate-300">No prompts available yet. Share your own in the prompt bank.</div>
+          )}
         </div>
       </section>
 

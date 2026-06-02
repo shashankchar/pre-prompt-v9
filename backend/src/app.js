@@ -9,6 +9,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import editorRoutes from "./routes/editorRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import promptRoutes from "./routes/promptRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/editors", editorRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/prompts", promptRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.use((err, _req, res, _next) => {

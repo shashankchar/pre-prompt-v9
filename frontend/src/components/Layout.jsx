@@ -17,6 +17,7 @@ export default function Layout() {
           </Link>
           <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
             <NavLink to="/explore" className="hover:text-white">Explore</NavLink>
+            <NavLink to="/prompts" className="hover:text-white">Prompt Bank</NavLink>
             {user && <NavLink to={dashboard} className="hover:text-white">Dashboard</NavLink>}
             {user?.role === "admin" && <NavLink to="/admin" className="hover:text-white">Admin</NavLink>}
           </div>

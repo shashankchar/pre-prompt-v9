@@ -10,6 +10,7 @@ import EditorProfile from "./pages/EditorProfile";
 import ExploreEditors from "./pages/ExploreEditors";
 import LandingPage from "./pages/LandingPage";
 import RequestProject from "./pages/RequestProject";
+import PromptBank from "./pages/PromptBank";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route index element={<LandingPage />} />
         <Route path="explore" element={<ExploreEditors />} />
         <Route path="editors/:username" element={<EditorProfile />} />
+        <Route path="prompts" element={<PromptBank />} />
         <Route path="login" element={<AuthPage mode="login" />} />
         <Route path="register" element={<AuthPage mode="register" />} />
         <Route path="request/:editorId" element={<ProtectedRoute roles={["client", "admin"]}><RequestProject /></ProtectedRoute>} />
